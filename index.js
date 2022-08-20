@@ -4,6 +4,7 @@ const { execute } = require('./commands/execute.js');
 const { leave } = require('./commands/leave.js');
 const { join } = require('./commands/join.js');
 const { showQueue } = require('./commands/show-queue.js');
+const { skip } = require('./commands/skip.js');
 const { search } = require('./commands/search.js');
 const { volume } = require('./commands/volume.js');
 
@@ -22,7 +23,6 @@ const queue = new Map();
 
 // client listeners
 client.once('ready', c => {
-	console.log('Ready!');
 	console.log(`Logged in as ${c.user.tag}`);
 });
 
@@ -48,7 +48,7 @@ client.on('messageCreate', message => {
 		return;
 	}
 	else if (message.content.startsWith(`${prefix}skip`)) {
-		// skip(message, serverQueue);
+		skip(serverQueue, message.channel);
 		return;
 	}
 	else if (message.content.startsWith(`${prefix}stop`)) {
