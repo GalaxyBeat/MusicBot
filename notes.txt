@@ -1,5 +1,7 @@
 TODO:
-8. Add remove from queue command (remove specific song from queue)
+12. More general refactoring. Simplify, remove duplication
+13. More graceful error handling
+14. Play specific music when user joins voice channel? (Annoying category)
 
 Done:
 1. Remove current song from queue after finishing
