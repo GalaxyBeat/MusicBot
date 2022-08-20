@@ -1,3 +1,6 @@
+const { isYoutubeUrl } = require('../util.js');
+const { search } = require('../commands/search.js');
+
 const ytdl = require('ytdl-core');
 const { createAudioResource } = require('@discordjs/voice');
 
@@ -35,6 +38,23 @@ function play(queue, guild, song, queueInitiated) {
 	serverQueue.textChannel.send(`Started playing: **${song.title}**`);
 }
 
+async function playByQuery(queue, serverQueue, guild, memberId, textChannel, query) {
+    if (isYoutubeUrl(query)) {
+        songInfo = await ytdl.getBasicInfo(query);
+
+        const song = {
+            title: songInfo.videoDetails.title,
+            url: songInfo.videoDetails.video_url,
+        };
+
+        serverQueue.songs.push(song);
+        play(queue, guild, serverQueue.songs[0], false);
+    } else {
+        search(serverQueue, query, memberId, textChannel);
+    }
+}
+
 module.exports = {
-    play
+    play,
+    playByQuery
 };
