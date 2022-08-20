@@ -6,6 +6,8 @@ const { help } = require('./commands/help.js');
 const { leave } = require('./commands/leave.js');
 const { join } = require('./commands/join.js');
 const { nowPlaying } = require('./commands/now-playing.js');
+const { pause } = require('./commands/pause.js');
+const { resume } = require('./commands/resume.js');
 const { showQueue } = require('./commands/show-queue.js');
 const { skip } = require('./commands/skip.js');
 const { search } = require('./commands/search.js');
@@ -84,6 +86,14 @@ client.on('messageCreate', message => {
 	}
 	else if (message.content.startsWith(`${prefix}nowplaying`)) {
 		nowPlaying(queue, serverQueue, message.channel);
+		return;
+	}
+	else if (message.content.startsWith(`${prefix}pause`)) {
+		pause(serverQueue, message.channel);
+		return;
+	}
+	else if (message.content.startsWith(`${prefix}resume`)) {
+		resume(serverQueue, message.channel);
 		return;
 	}
 	else {
