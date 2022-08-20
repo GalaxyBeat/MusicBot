@@ -1,8 +1,14 @@
 TODO:
-1. Remove current song from queue after finishing DONE
-2. Play next song after current song finishes DONE
+8. Add remove from queue command (remove specific song from queue)
+9. Add pause command
+10. Add resume command
+11. If no number is specified for !volume, show current volume
+
+Done:
+1. Remove current song from queue after finishing
+2. Play next song after current song finishes
 3. Clean up execute command DONE-ish
-4. Add skip command DONE
-5. Add clear command DONE
+4. Add skip command
+5. Add clear command
 6. Add help command details
 7. Add now playing command

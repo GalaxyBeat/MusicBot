@@ -2,8 +2,10 @@ const { prefix, token } = require('./config.json');
 
 const { clear } = require('./commands/clear.js');
 const { execute } = require('./commands/execute.js');
+const { help } = require('./commands/help.js');
 const { leave } = require('./commands/leave.js');
 const { join } = require('./commands/join.js');
+const { nowPlaying } = require('./commands/now-playing.js');
 const { showQueue } = require('./commands/show-queue.js');
 const { skip } = require('./commands/skip.js');
 const { search } = require('./commands/search.js');
@@ -36,7 +38,7 @@ client.once('disconnect', () => {
 });
 
 client.on('messageCreate', message => {
-	console.log(`message: ${message.content}`);
+	//console.log(`message: ${message.content}`);
 
 	if (message.author.bot) return;
 	if (!message.content.startsWith(prefix)) return;
@@ -77,7 +79,11 @@ client.on('messageCreate', message => {
 		return;
 	}
 	else if (message.content.startsWith(`${prefix}help`)) {
-		message.channel.send('Shut up nerd.');
+		help(message.channel)
+		return;
+	}
+	else if (message.content.startsWith(`${prefix}nowplaying`)) {
+		nowPlaying(queue, serverQueue, message.channel);
 		return;
 	}
 	else {
