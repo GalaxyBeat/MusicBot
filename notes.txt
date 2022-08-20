@@ -9,6 +9,7 @@ Done:
 5. Add clear command
 6. Add help command details
 7. Add now playing command
+8. Add remove from queue command (remove specific song from queue)
 9. Add pause command
 10. Add resume command
 11. If no number is specified for !volume, show current volume

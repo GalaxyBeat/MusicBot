@@ -7,6 +7,7 @@ const { leave } = require('./commands/leave.js');
 const { join } = require('./commands/join.js');
 const { nowPlaying } = require('./commands/now-playing.js');
 const { pause } = require('./commands/pause.js');
+const { remove } = require('./commands/remove.js');
 const { resume } = require('./commands/resume.js');
 const { showQueue } = require('./commands/show-queue.js');
 const { skip } = require('./commands/skip.js');
@@ -94,6 +95,10 @@ client.on('messageCreate', message => {
 	}
 	else if (message.content.startsWith(`${prefix}resume`)) {
 		resume(serverQueue, message.channel);
+		return;
+	}
+	else if (message.content.startsWith(`${prefix}remove`)) {
+		remove(serverQueue, message.channel, args[1]);
 		return;
 	}
 	else {

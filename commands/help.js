@@ -11,6 +11,7 @@ async function help(textChannel) {
 !nowplaying - shows details of currently playing song
 !pause - pause currently playing song
 !resume - resume currently paused song
+!remove - removes a song from queue. specify by order number
 !help - lists available commands\`\`\``;
     return textChannel.send(outputString);
 }
