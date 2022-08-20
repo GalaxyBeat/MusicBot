@@ -1,5 +1,6 @@
 const { prefix, token } = require('./config.json');
 
+const { clear } = require('./commands/clear.js');
 const { execute } = require('./commands/execute.js');
 const { leave } = require('./commands/leave.js');
 const { join } = require('./commands/join.js');
@@ -51,8 +52,8 @@ client.on('messageCreate', message => {
 		skip(serverQueue, message.channel);
 		return;
 	}
-	else if (message.content.startsWith(`${prefix}stop`)) {
-		// stop(message, serverQueue);
+	else if (message.content.startsWith(`${prefix}clear`)) {
+		clear(serverQueue, message.channel);
 		return;
 	}
 	else if (message.content.startsWith(`${prefix}volume`)) {

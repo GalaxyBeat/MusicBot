@@ -3,4 +3,6 @@ TODO:
 2. Play next song after current song finishes DONE
 3. Clean up execute command DONE-ish
 4. Add skip command DONE
-5. Add stop command
+5. Add clear command DONE
+6. Add help command details
+7. Add now playing command
