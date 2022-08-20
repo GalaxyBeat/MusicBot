@@ -1,6 +1,6 @@
 const { defaultVolume } = require('../constants.js');
 
-const { joinVoiceChannel } = require('@discordjs/voice');
+const { createAudioPlayer, joinVoiceChannel } = require('@discordjs/voice');
 
 async function join(queue, serverQueue, guild, textChannel, voiceChannel) {
 	if (!serverQueue) {
@@ -30,6 +30,10 @@ async function join(queue, serverQueue, guild, textChannel, voiceChannel) {
                     adapterCreator: guild.voiceAdapterCreator,
                 });
             queueConstruct.connection = connection;
+
+			var player = createAudioPlayer();
+			queueConstruct.connection.subscribe(player);
+			queueConstruct.player = player;
 		}
 		catch (err) {
 			console.log(err);

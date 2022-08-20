@@ -32,7 +32,7 @@ async function execute(message, queue, serverQueue) {
 				};
 	
 				serverQueue.songs.push(song);
-				play(queue, message.guild, serverQueue.songs[0]);
+				play(queue, message.guild, serverQueue.songs[0], false);
 			} else {
 				search(serverQueue, query, message.member.id, message.channel);
 			}
@@ -100,15 +100,13 @@ async function execute(message, queue, serverQueue) {
 			serverQueue.songs.push(song);
 			serverQueue.searchResults = new Map();
 			if (serverQueue.songs.length === 1) {
-				play(queue, message.guild, serverQueue.songs[0]);
+				play(queue, message.guild, serverQueue.songs[0], false);
 			} else {
 				return message.channel.send(`${song.title} has been added to the queue!`);
 			}
 		} else {
 			search(serverQueue, query, message.member.id, message.channel);
 		}
-
-		//play(queue, message.guild, serverQueue.songs[0]);
 	}
 }
 

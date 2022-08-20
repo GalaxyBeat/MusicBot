@@ -1,0 +1,6 @@
+TODO:
+1. Remove current song from queue after finishing
+2. Play next song after current song finishes
+3. Clean up execute command
+4. Add skip command
+5. Add stop command

@@ -1,4 +1,4 @@
-const defaultVolume = 1;
+const defaultVolume = 0.2;
 const minVolumeInput = 0;
 const maxVolumeInput = 200;
 
