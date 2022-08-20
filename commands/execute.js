@@ -100,9 +100,12 @@ function permissionCheck(message) {
 }
 
 async function enqueueSongChoice(queue, serverQueue, guild, memberId, textChannel, query, userSearchResults) {
-	if (isNaN(query)) {
+	if (isNaN(query)
+		|| parseInt(query) < 1
+		|| parseInt(query) > 5
+	) {
 		serverQueue.searchResults.delete(memberId);
-		return textChannel.send('You need to enter a number between 1-5');
+		return textChannel.send('You need to enter a number between 1 - 5');
 	}
 
 	const songUrl = userSearchResults[query - 1];

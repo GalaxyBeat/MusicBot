@@ -8,6 +8,9 @@ async function volume(message, serverQueue) {
 		const args = message.content.split(' ');
 		const inputVolume = args[1];
 
+		if (!inputVolume) {
+			return message.channel.send(`Volume is set to: ${serverQueue.volume * 100}`);
+		}
 		// also add check for integer based value
 		if (isNaN(inputVolume)) {
 			return message.channel.send('A number is expected!');
