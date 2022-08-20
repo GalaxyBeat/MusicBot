@@ -1,6 +1,5 @@
 TODO:
 8. Add remove from queue command (remove specific song from queue)
-11. If no number is specified for !volume, show current volume
 
 Done:
 1. Remove current song from queue after finishing
@@ -12,3 +11,4 @@ Done:
 7. Add now playing command
 9. Add pause command
 10. Add resume command
+11. If no number is specified for !volume, show current volume
