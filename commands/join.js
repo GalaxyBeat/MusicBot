@@ -15,23 +15,23 @@ async function join(queue, serverQueue, guild, textChannel, voiceChannel) {
 			playing: false,
 			player: null,
 			resource: null,
-            searchResults: new Map()
-            
+			searchResults: new Map(),
+
 		};
 
 		// setting the queue using our contract
 		queue.set(guild.id, queueConstruct);
 
 		try {
-            const connection = joinVoiceChannel(
-                {
-                    channelId: voiceChannel.id,
-                    guildId: guild.id,
-                    adapterCreator: guild.voiceAdapterCreator,
-                });
-            queueConstruct.connection = connection;
+			const connection = joinVoiceChannel(
+				{
+					channelId: voiceChannel.id,
+					guildId: guild.id,
+					adapterCreator: guild.voiceAdapterCreator,
+				});
+			queueConstruct.connection = connection;
 
-			var player = createAudioPlayer();
+			const player = createAudioPlayer();
 			queueConstruct.connection.subscribe(player);
 			queueConstruct.player = player;
 		}
@@ -40,11 +40,12 @@ async function join(queue, serverQueue, guild, textChannel, voiceChannel) {
 			queue.delete(guild.id);
 			return textChannel.send(err);
 		}
-	} else {
-        return textChannel.send('I am already in the channel!');
-    }
+	}
+	else {
+		return textChannel.send('I am already in the channel!');
+	}
 }
 
 module.exports = {
-    join
+	join,
 };

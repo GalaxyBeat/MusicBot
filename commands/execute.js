@@ -9,7 +9,7 @@ const ytdl = require('ytdl-core');
 async function execute(message, queue, serverQueue) {
 	permissionCheck(message);
 
-	let query = parseMessageContentToQuery(message.content);
+	const query = parseMessageContentToQuery(message.content);
 
 	// if server queue for guild has not been created yet
 	// create server queue and then immediately play song based on query input
@@ -28,31 +28,58 @@ async function execute(message, queue, serverQueue) {
 	// else if a server queue exists
 	else {
 		const userSearchResults = serverQueue.searchResults.get(message.member.id);
-		
-		// if there is already a song playing, we want to enqueue the song
+
+		// if there is already a song playing, we want to enqueue the song or start a search for a song
 		if (serverQueue.songs != 0) {
 			if (isYoutubeUrl(query)) {
-				songInfo = await ytdl.getBasicInfo(query);
+				const songInfo = await ytdl.getBasicInfo(query);
 
 				const song = {
 					title: songInfo.videoDetails.title,
 					url: songInfo.videoDetails.video_url,
 				};
-	
+
 				serverQueue.songs.push(song);
-			} else {
-				if (userSearchResults) {
-					enqueueSongChoice(queue, serverQueue, message.guild, message.member.id, message.channel, query, userSearchResults);
-				} else {
-					search(serverQueue, query, message.member.id, message.channel);
-				}
+			}
+			else if (userSearchResults) {
+				enqueueSongChoice(
+					queue,
+					serverQueue,
+					message.guild,
+					message.member.id,
+					message.channel,
+					query,
+					userSearchResults,
+				);
+			}
+			else {
+				search(
+					serverQueue,
+					query,
+					message.member.id,
+					message.channel,
+				);
 			}
 		}
 		// if there is not, then we either play or search for songs based on if there is an existing song search
 		else if (userSearchResults) {
-			enqueueSongChoice(queue, serverQueue, message.guild, message.member.id, message.channel, query, userSearchResults);
-		} else {
-			search(serverQueue, query, message.member.id, message.channel);
+			enqueueSongChoice(
+				queue,
+				serverQueue,
+				message.guild,
+				message.member.id,
+				message.channel,
+				query,
+				userSearchResults,
+			);
+		}
+		else {
+			search(
+				serverQueue,
+				query,
+				message.member.id,
+				message.channel,
+			);
 		}
 	}
 }
@@ -79,7 +106,7 @@ async function enqueueSongChoice(queue, serverQueue, guild, memberId, textChanne
 	}
 
 	const songUrl = userSearchResults[query - 1];
-	songInfo = await ytdl.getBasicInfo(songUrl);
+	const songInfo = await ytdl.getBasicInfo(songUrl);
 
 	const song = {
 		title: songInfo.videoDetails.title,
@@ -93,12 +120,18 @@ async function enqueueSongChoice(queue, serverQueue, guild, memberId, textChanne
 
 	// if this is the only song then immediately start playing
 	if (serverQueue.songs.length === 1) {
-		play(queue, guild, serverQueue.songs[0], false);
-	} else {
+		play(
+			queue,
+			guild,
+			serverQueue.songs[0],
+			false,
+		);
+	}
+	else {
 		return textChannel.send(`${song.title} has been added to the queue!`);
 	}
 }
 
 module.exports = {
-    execute
+	execute,
 };

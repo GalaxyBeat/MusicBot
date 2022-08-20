@@ -15,7 +15,7 @@ const client = new Client({ intents: [
 	GatewayIntentBits.GuildMessages,
 	GatewayIntentBits.DirectMessages,
 	GatewayIntentBits.MessageContent,
-    GatewayIntentBits.GuildVoiceStates],
+	GatewayIntentBits.GuildVoiceStates],
 });
 
 const queue = new Map();
